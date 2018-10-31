@@ -1,6 +1,19 @@
 <template>
   <section class="container">
-    <h1 class="mt-4 mb-3">{{ title }}</h1>
+    <h1 class="b-title mt-4 mb-3">{{ title }}</h1>
+    <form @submit.prevent="getMovies" class="b-countries-finder__form mb-4">
+      <div class="form-group">
+        <label for="movieName"><strong>Movie name</strong></label>
+        <input type="text" class="form-control" id="movieName"
+               placeholder="Type a movie name like 'batman'" v-model="movieName"
+               required>
+      </div>
+      <button type="submit" class="btn btn-primary"
+              :disabled="movieName.length < 2">
+        Search
+      </button>
+    </form>
+
     <div class="row">
       <div class="col-12 col-sm-4 col-md-3" v-for="movie in movies">
         <div class="b-movie">
@@ -29,13 +42,22 @@
     components: {MoviesCatalog},
     data() {
       return {
+        movieName: 'Batman',
         movies: [],
-        title: 'Search',
+        title: 'Let\'s find an amazing movie',
       };
     },
+    methods: {
+      getMovies: function() {
+        const serviceURL = `http://www.omdbapi.com/?s=${this.movieName}&apikey=a7de0943`;
+        this.$axios.$get(serviceURL).then(response => {
+          this.movies = response.Search;
+        });
+      },
+    },
     asyncData({params, app}) {
-
-      const serviceURL = 'http://www.omdbapi.com/?s=Batman&apikey=a7de0943';
+      const initialMovieName = 'Batman';
+      const serviceURL = `http://www.omdbapi.com/?s=${initialMovieName}&apikey=a7de0943`;
 
       // The result from asyncData will be merged with data
       // https://axios.nuxtjs.org/usage
