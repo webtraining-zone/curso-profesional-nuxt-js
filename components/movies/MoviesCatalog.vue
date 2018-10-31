@@ -1,30 +1,24 @@
 <template>
-  <section>
-    movies catalog #2
-    {{ movies }}
-  </section>
+  <div class="row">
+    <div class="col-12 col-sm-4 col-md-3" v-for="movie in movies">
+      <div class="b-movie">
+        <b-card :title="movie.Title"
+                :img-src="movie.Poster"
+                :img-alt="movie.Title"
+                img-top
+                tag="article"
+                class="mb-2">
+          <p class="card-text">
+            <strong>Year: </strong><span>{{ movie.Year }}</span>
+          </p>
+          <b-button href="#" variant="primary">Go somewhere</b-button>
+        </b-card>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-
   export default {
-    data() {
-      return {
-        movies: [],
-      };
-    },
-    // asyncData({params, app}) {
-    //
-    //   const serviceURL = 'http://www.omdbapi.com/?i=tt3896198&apikey=a7de0943';
-    //
-    //   // The result from asyncData will be merged with data
-    //   // https://axios.nuxtjs.org/usage
-    //   return app.$axios.$get(serviceURL).then(response => {
-    //     console.log('Async data');
-    //     return {movies: response.data};
-    //   }).catch((e) => {
-    //     error({statusCode: 500, message: e});
-    //   });
-    //
-    // },
+    props: {movies: Array},
   };
 </script>
