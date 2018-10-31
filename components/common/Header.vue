@@ -7,23 +7,17 @@
 
         <b-navbar-brand href="#">
           <i class="fas fa-film"></i>
-          <span>Movify</span>
+          <nuxt-link to="/" class="nav-link-brand"><span>Movify</span></nuxt-link>
         </b-navbar-brand>
 
         <b-collapse is-nav id="nav_collapse">
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#">Link</b-nav-item>
-            <b-nav-item href="#" disabled>Disabled</b-nav-item>
-            <b-nav-item-dropdown right>
-              <!-- Using button-content slot -->
-              <template slot="button-content">
-                <em>User</em>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Signout</b-dropdown-item>
-            </b-nav-item-dropdown>
+            <li class="nav-item">
+              <nuxt-link to="/search" class="nav-link">Search</nuxt-link>
+            </li>
+
           </b-navbar-nav>
 
         </b-collapse>
@@ -41,6 +35,15 @@
     },
   };
 </script>
-<style>
+<style scoped>
+  .nav-link-brand {
+    color: white;
+    font-weight: bold;
+  }
 
+  .navbar-dark .navbar-nav .nav-link.nuxt-link-active {
+    /*font-weight: bold;*/
+    color: white;
+    border-bottom: 2px solid white;
+  }
 </style>
