@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <article v-if="movie" class="mt-3">
+    <article v-if="movie" class="mt-3 mb-3">
 
       <div class="b-movie">
         <div class="row">
