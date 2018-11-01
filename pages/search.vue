@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container mb-5">
     <h1 class="b-title mt-4 mb-3">{{ title }}</h1>
     <form @submit.prevent="getMovies" class="b-countries-finder__form mb-4">
       <div class="form-group">

@@ -8,8 +8,8 @@
             <img :src="movie.Poster" alt="" class="img-fluid"/>
           </div>
           <div class="col-12 col-sm-8 col-md-7 col-lg-9">
-            <h1>{{ movie.Title }}</h1>
-            <div class="b-movie__plot">
+            <h1 class="b-movie__title">{{ movie.Title }}</h1>
+            <div class="b-movie__plot mt-3 mb-3">
               {{ movie.Plot }}
             </div>
             <div class="b-movie__extra-information">
@@ -34,11 +34,13 @@
               </div>
 
               <div>
-                <strong>Language: </strong><span>{{ movie.Language }}</span>
+                <strong>Actors: </strong><span>{{ movie.Actors }}</span>
               </div>
 
+              <hr class="b-separator">
+
               <div>
-                <strong>Actors: </strong><span>{{ movie.Actors }}</span>
+                <strong>Language: </strong><span>{{ movie.Language }}</span>
               </div>
 
               <div>
@@ -92,3 +94,26 @@
     },
   };
 </script>
+<style>
+
+  .b-movie__title {
+    background: linear-gradient(to right, #ffc107 0, red 85%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .b-movie__plot {
+    background: #ebc775;
+    padding: 20px;
+    color: black;
+    border-radius: 5px;
+  }
+
+  .b-separator {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #ffc107, #ccc);
+
+  }
+</style>
