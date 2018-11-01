@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12 col-sm-4 col-md-3" v-for="movie in movies">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="movie in movies">
       <div class="b-movie">
         <!--<b-card :title="movie.Title"-->
         <!--:img-src="movie.Poster"-->
