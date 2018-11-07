@@ -1,5 +1,8 @@
 <template>
   <section class="container">
+    <a href="#" @click.prevent="goBack()" class="btn btn-warning mt-3">
+      <i class="fas fa-hand-point-left"></i> Go back
+    </a>
     <article v-if="movie" class="mt-3 mb-3">
 
       <div class="b-movie">
@@ -72,6 +75,11 @@
       return {
         movie: false,
       };
+    },
+    methods: {
+      goBack() {
+        this.$router.back();
+      },
     },
     asyncData({app, params}) {
 
