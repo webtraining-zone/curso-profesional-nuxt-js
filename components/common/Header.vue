@@ -17,7 +17,9 @@
             <li class="nav-item">
               <nuxt-link to="/search" class="nav-link">Search</nuxt-link>
             </li>
-
+            <li class="nav-item">
+              <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
+            </li>
           </b-navbar-nav>
 
         </b-collapse>
