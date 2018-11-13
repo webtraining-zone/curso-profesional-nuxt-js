@@ -84,7 +84,7 @@
             group: 'api',
             title: 'Error',
             text: 'Unable to create an account, please try it again.',
-            duration: 10000,
+            duration: 30000,
             type: 'error',
 
           });
