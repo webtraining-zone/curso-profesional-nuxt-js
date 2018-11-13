@@ -7,19 +7,8 @@
       </div>
 
       <div class="col-12 col-sm-8 col-md-6 offset-md-3">
-        <form @submit.prevent="createAccount" class="b-register-form mb-4">
+        <form @submit.prevent="login" class="b-login-form mb-4">
 
-          <div class="form-group">
-            <label for="name">Name* :</label>
-            <input id="name" name="name" class="form-control"
-                   type="text" required v-model="user.name"/>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email* :</label>
-            <input id="email" name="email" class="form-control"
-                   type="email" required v-model="user.email"/>
-          </div>
 
           <div class="form-group">
             <label for="username">Username* :</label>
@@ -42,7 +31,8 @@
   </section>
 </template>
 <script>
-  import {USERS_BASE_URL} from '../config/api';
+  import {USERS_BASE_URL, SESSION_STORAGE_USER_KEY} from '../config/api';
+  import SessionStorageService from '../services/session-storage-service';
 
   export default {
     data() {
@@ -50,16 +40,14 @@
         isFormValid: false,
         title: 'Register',
         user: {
-          name: 'Esmeralda',
           username: 'esmeralda',
-          email: 'esmeralda@webtraining.zone',
           password: 'esmeralda',
         },
       };
     },
     methods: {
-      createAccount: function() {
-        const serviceURL = `${USERS_BASE_URL}/users`;
+      login: function() {
+        const serviceURL = `${USERS_BASE_URL}/users/login`;
         const data = this.user;
         const config = {
           headers: {
@@ -67,18 +55,21 @@
           },
         };
 
-        // 1. Make POST request to create an account
+        // 1. Make a LOGIN request
         this.$axios.$post(serviceURL, data, config).then(userData => {
-
           console.log(userData);
 
-          // 2. Notify the user everything was ok!
+          // 2. Store user data in session storage (local)
+          SessionStorageService.set(SESSION_STORAGE_USER_KEY, userData);
+
+          // 3. Notify the user everything was ok!
           this.$notify({
             group: 'api',
             title: 'Success!',
-            text: 'Account created.',
+            text: 'Login successful.',
             duration: 5000,
             type: 'success',
+
           });
 
         }).catch(err => {
@@ -87,7 +78,7 @@
           this.$notify({
             group: 'api',
             title: 'Error',
-            text: 'Unable to create an account, please try it again.',
+            text: 'Unable to login, please try it again.',
             duration: 5000,
             type: 'error',
 
