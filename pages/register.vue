@@ -1,5 +1,6 @@
 <template>
   <section class="container mb-5">
+    <notifications group="api" position="top center"/>
     <div class="row">
       <div class="col-12">
         <h1 class="b-title mt-4 mb-3 text-center">{{ title }}</h1>
@@ -48,8 +49,8 @@
   </section>
 </template>
 <script>
-  import {API_BASE_URL, API_KEY} from './../config/api';
   import {USERS_BASE_URL} from '../config/api';
+  // import Vue from 'vue';
 
   export default {
     data() {
@@ -78,6 +79,16 @@
           console.log(response);
         }).catch(err => {
           console.log(err);
+
+          this.$notify({
+            group: 'api',
+            title: 'Error',
+            text: 'Unable to create an account, please try it again.',
+            duration: 10000,
+            type: 'error',
+
+          });
+
         });
 
       },

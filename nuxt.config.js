@@ -33,12 +33,15 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    // CSS file in the project
+    '@/assets/css/notifications.css',
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/vue-notification'
   ],
 
   /*
