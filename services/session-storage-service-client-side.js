@@ -1,4 +1,4 @@
-class SessionStorageService {
+class SessionStorageServiceClientSide {
 
   static set(key, data) {
     sessionStorage.setItem(key, JSON.stringify(data));
@@ -13,4 +13,4 @@ class SessionStorageService {
   }
 }
 
-export default SessionStorageService;
+export default SessionStorageServiceClientSide;

@@ -32,7 +32,7 @@
 </template>
 <script>
   import {USERS_BASE_URL, SESSION_STORAGE_USER_KEY} from '../config/api';
-  import SessionStorageService from '../services/session-storage-service';
+  import SessionStorageServiceClientSide from '../services/session-storage-service-client-side';
 
   export default {
     data() {
@@ -60,7 +60,7 @@
           console.log(userData);
 
           // 2. Store user data in session storage (local)
-          SessionStorageService.set(SESSION_STORAGE_USER_KEY, userData);
+          SessionStorageServiceClientSide.set(SESSION_STORAGE_USER_KEY, userData);
 
           // 3. Notify the user everything was ok!
           this.$notify({
@@ -69,8 +69,9 @@
             text: 'Login successful.',
             duration: 5000,
             type: 'success',
-
           });
+
+          //
 
         }).catch(err => {
           console.log(err);
