@@ -1,6 +1,7 @@
-const pkg = require('./package')
-const bodyParser = require('body-parser')
-const session = require('express-session')
+const pkg = require('./package');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const SESSION_SECRET_KEY = require('./config/session').SESSION_SECRET_KEY;
 
 module.exports = {
   mode: 'universal',
@@ -84,7 +85,9 @@ module.exports = {
     bodyParser.json(),
     // session middleware
     session({
-      secret: 'super-secret-key',
+      // @FIXME: Don't store this in your source code management platform (Github, etc.)
+      // Use a environment variable instead
+      secret: SESSION_SECRET_KEY ? SESSION_SECRET_KEY: 'super-secret-key-that-should-be-replaced',
       resave: false,
       saveUninitialized: false,
       cookie: { maxAge: 60000 }
