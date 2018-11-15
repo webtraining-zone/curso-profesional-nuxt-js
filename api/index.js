@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
 // Add POST - /api/logout
 router.post('/logout', (req, res) => {
   delete req.session.authUser;
+  console.log('>> logout() from API');
   res.json({ok: true});
 });
 

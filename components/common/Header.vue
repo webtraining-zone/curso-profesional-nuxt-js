@@ -17,11 +17,24 @@
             <li class="nav-item">
               <nuxt-link to="/search" class="nav-link">Search</nuxt-link>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item" v-if="!$store.state.authUser">
+              <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
+            </li>
+
+            <li class="nav-item" v-if="!$store.state.authUser">
               <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
             </li>
-            <li class="nav-item">
-              <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
+
+            <li class="nav-item" v-if="$store.state.authUser">
+              <nuxt-link to="/private/my-account" class="nav-link">My account</nuxt-link>
+            </li>
+
+            <li class="nav-item ml-4" v-if="$store.state.authUser">
+              <button @click="logout" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="sr-only">Logout</span>
+              </button>
             </li>
           </b-navbar-nav>
 
@@ -37,6 +50,16 @@
       return {
         name: 'Movify',
       };
+    },
+    methods: {
+      async logout() {
+        try {
+          // Dispatch the "logout" action from the store
+          await this.$store.dispatch('logout');
+        } catch (e) {
+          console.error(e);
+        }
+      },
     },
   };
 </script>

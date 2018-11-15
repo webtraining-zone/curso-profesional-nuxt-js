@@ -33,7 +33,7 @@ export const actions = {
   },
 
   async logout({commit}) {
-    // await axios.post(`api/logout`);
+    await axios.post(`/api/logout`);
     commit('SET_USER', null);
   },
 
