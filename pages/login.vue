@@ -47,12 +47,19 @@
     methods: {
       async login() {
         try {
+          // Dispatch the login action (with commit included)
           await this.$store.dispatch('login', {
             username: this.user.username,
             password: this.user.password,
           });
+
+          // Clean the form (optional)
           this.user.username = '';
           this.user.password = '';
+
+          // Redirect to a "private" page
+          this.$router.push('/private/my-account');
+
         } catch (e) {
           console.error(e);
         }

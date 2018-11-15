@@ -56,6 +56,9 @@
         try {
           // Dispatch the "logout" action from the store
           await this.$store.dispatch('logout');
+
+          // Redirect to a "private" page
+          this.$router.push('/login');
         } catch (e) {
           console.error(e);
         }
