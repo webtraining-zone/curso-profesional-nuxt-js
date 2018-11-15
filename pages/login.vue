@@ -35,6 +35,7 @@
   // import SessionStorageServiceClientSide from '../services/session-storage-service-client-side';
 
   export default {
+    middleware: 'redirect-if-authenticated',
     data() {
       return {
         title: 'Login',
