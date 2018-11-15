@@ -31,14 +31,13 @@
   </section>
 </template>
 <script>
-  import {USERS_BASE_URL, SESSION_STORAGE_USER_KEY} from '../config/api';
-  import SessionStorageServiceClientSide from '../services/session-storage-service-client-side';
+  // import {USERS_BASE_URL, SESSION_STORAGE_USER_KEY} from '../config/api';
+  // import SessionStorageServiceClientSide from '../services/session-storage-service-client-side';
 
   export default {
     data() {
       return {
-        isFormValid: false,
-        title: 'Register',
+        title: 'Login',
         user: {
           username: 'esmeralda',
           password: 'esmeralda',
@@ -46,48 +45,63 @@
       };
     },
     methods: {
-      login: function() {
-        const serviceURL = `${USERS_BASE_URL}/users/login`;
-        const data = this.user;
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-
-        // 1. Make a LOGIN request
-        this.$axios.$post(serviceURL, data, config).then(userData => {
-          console.log(userData);
-
-          // 2. Store user data in session storage (local)
-          SessionStorageServiceClientSide.set(SESSION_STORAGE_USER_KEY, userData);
-
-          // 3. Notify the user everything was ok!
-          this.$notify({
-            group: 'api',
-            title: 'Success!',
-            text: 'Login successful.',
-            duration: 5000,
-            type: 'success',
+      async login() {
+        try {
+          await this.$store.dispatch('login', {
+            username: this.user.username,
+            password: this.user.password,
           });
-
-          //
-
-        }).catch(err => {
-          console.log(err);
-
-          this.$notify({
-            group: 'api',
-            title: 'Error',
-            text: 'Unable to login, please try it again.',
-            duration: 5000,
-            type: 'error',
-
-          });
-
-        });
-
+          this.user.username = '';
+          this.user.password = '';
+        } catch (e) {
+          console.error(e);
+        }
       },
+      //
+      // CLIENT-SIDE LOGIN
+      //
+      // login: function() {
+      //   const serviceURL = `${USERS_BASE_URL}/users/login`;
+      //   const data = this.user;
+      //   const config = {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   };
+      //
+      //   // 1. Make a LOGIN request
+      //   this.$axios.$post(serviceURL, data, config).then(userData => {
+      //     console.log(userData);
+      //
+      //     // 2. Store user data in session storage (local)
+      //     SessionStorageServiceClientSide.set(SESSION_STORAGE_USER_KEY, userData);
+      //
+      //     // 3. Notify the user everything was ok!
+      //     this.$notify({
+      //       group: 'api',
+      //       title: 'Success!',
+      //       text: 'Login successful.',
+      //       duration: 5000,
+      //       type: 'success',
+      //     });
+      //
+      //     //
+      //
+      //   }).catch(err => {
+      //     console.log(err);
+      //
+      //     this.$notify({
+      //       group: 'api',
+      //       title: 'Error',
+      //       text: 'Unable to login, please try it again.',
+      //       duration: 5000,
+      //       type: 'error',
+      //
+      //     });
+      //
+      //   });
+      //
+      // },
     },
   };
 </script>

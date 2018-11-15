@@ -1,9 +1,11 @@
-export default function({error}) {
+export default function({store, error}) {
 
   // User is not authenticated
-  const isUserAuthenticated = false;
+  const authUser = store.state.authUser;
 
-  if (!isUserAuthenticated) {
+  console.log(">> Middleware AUTH > authUser > ", authUser);
+
+  if (!authUser) {
     error({
       message: 'Please start a session to see this page',
       statusCode: 403,

@@ -1,4 +1,6 @@
 const pkg = require('./package')
+const bodyParser = require('body-parser')
+const session = require('express-session')
 
 module.exports = {
   mode: 'universal',
@@ -70,5 +72,24 @@ module.exports = {
     extend(config, ctx) {
 
     }
-  }
+  },
+  /*
+ ** Add server middleware
+ ** Nuxt.js uses `connect` module as server
+ ** So most of express middleware works with nuxt.js server middleware
+ */
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'super-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/api/index.js'
+  ]
 }
