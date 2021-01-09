@@ -24,14 +24,26 @@ router.post('/login', async (req, res) => {
 
   if (username && password) {
 
-    const {data} = await axios.post(`${USERS_BASE_URL}/users/login`,
-      {username, password});
+    try {
+      const {data} = await axios.post(`${USERS_BASE_URL}/users/login`,
+        {username, password});
 
-    console.log('>> login() > data from LARAVEL', data);
+      req.session.authUser = data;
 
-    req.session.authUser = data;
+      return res.json(data);
+    } catch (error) {
+      // Check for 'Not Acceptable'
+      if (error.response && error.response.status === 406) {
+        return res.json({
+          error: true,
+          message: 'My custom error message if I want...'
+        });
+      } else {
+        // Other errors!
+        console.log(error);
+      }
+    }
 
-    return res.json(data);
   }
   res.status(401).json({message: 'Bad credentials'});
 })

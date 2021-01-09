@@ -62,7 +62,9 @@
           this.$router.push('/private/my-account');
 
         } catch (e) {
-          console.error(e);
+          const errorForUser = 'Invalid user or password, please try again.'
+          // Use a Vue component with more "styling" for better User Experience
+          alert(errorForUser)
         }
       },
       //
